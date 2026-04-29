@@ -1,0 +1,12 @@
+npx --no-install commitlint --edit "$1"
+
+BRANCH_NAME=$(git branch --show-current)
+COMMIT_MSG_FILE=$1
+
+if [ -n "$BRANCH_NAME" ] && [ -f "$COMMIT_MSG_FILE" ]; then
+  COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+  NEW_COMMIT_MSG="[$BRANCH_NAME] $COMMIT_MSG"
+
+  echo "$NEW_COMMIT_MSG" > "$COMMIT_MSG_FILE"
+fi
